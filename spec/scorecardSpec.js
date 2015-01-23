@@ -25,6 +25,15 @@ describe('Scorecard', function() {
       expect(scorecard.pinCount).toEqual(4);
     });
 
+    it('should be between 0 and 10', function() {
+      expect(scorecard.enterPins(-3)).toEqual('Please enter a valid number');
+    });
+
+    it('should not increase if number is not between 0 and 10', function() {
+      scorecard.enterPins(12);
+      expect(scorecard.pinCount).toEqual(0);
+    });
+
   });
 
 });

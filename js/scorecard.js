@@ -6,7 +6,12 @@ var Scorecard = function() {
 };
 
 Scorecard.prototype.enterPins = function(changePinsBy) {
-  this.pinCount += changePinsBy;
+  if (changePinsBy > 10 || changePinsBy < 0) {
+    return 'Please enter a valid number';
+  }
+  else {
+    this.pinCount += changePinsBy;
+  };
 };
 
 
