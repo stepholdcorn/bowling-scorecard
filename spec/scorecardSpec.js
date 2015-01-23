@@ -8,22 +8,22 @@ describe('Scorecard', function() {
 
   describe('by default', function() {
 
-    it('should have a pin count of zero', function() {
-      expect(scorecard.pinCount).toEqual(0);
+    it('should not have a pin count', function() {
+      expect(scorecard.pinCount1).toBe(null);
     });
 
-    it('should have a total score of zero', function() {
-      expect(scorecard.totalScore).toEqual(0);
+    it('should not have a total score', function() {
+      expect(scorecard.totalScore).toBe(null);
     });
 
   });
 
-  describe('number of pins knocked down', function() {
+  describe('pin count', function() {
 
-    it('should be able to be inputted', function() {
+    it('should be able to be inputted'), function() {
       scorecard.enterPins(4);
-      expect(scorecard.pinCount).toEqual(4);
-    });
+      expect(scorecard.pinCount1).toEqual(4);
+    };
 
     it('should be between 0 and 10', function() {
       expect(scorecard.enterPins(-3)).toEqual('Please enter a valid number');
@@ -31,7 +31,23 @@ describe('Scorecard', function() {
 
     it('should not increase if number is not between 0 and 10', function() {
       scorecard.enterPins(12);
-      expect(scorecard.pinCount).toEqual(0);
+      expect(scorecard.pinCount1).toBe(null);
+    });
+
+    it('should be stored separately for each throw in a frame'), function() {
+      scorecard.enterPins(4);
+      scorecard.enterPins(3);
+      expect(scorecard.pinCount1).toEqual(4);
+      expect(scorecard.pinCount2).toEqual(3);
+    };
+
+  });
+
+  describe('total score', function() {
+
+    it('should be the sum of the frame', function() {
+      scorecard.totalCalculator(4, 3);
+      expect(scorecard.totalScore).toEqual(7);
     });
 
   });
