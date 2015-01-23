@@ -45,6 +45,14 @@ describe('Scorecard', function() {
       expect(scorecard.pinCount2).toEqual(3);
     };
 
+    it('should be reset at the end of the frame', function() {
+      scorecard.enterPins(4);
+      scorecard.enterPins(3);
+      scorecard.totalCalculator(4, 3);
+      expect(scorecard.pinCount1).toBe(null);
+      expect(scorecard.pinCount2).toBe(null);
+    });
+
   });
 
   describe('score', function() {

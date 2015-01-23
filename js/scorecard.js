@@ -4,6 +4,7 @@ var Scorecard = function() {
   this.pinCount2 = null;
   this.totalScore = null;
   this.frameArray = [];
+  this.resetValue = null;
 
 };
 
@@ -24,6 +25,10 @@ Scorecard.prototype.totalCalculator = function(pinCount1, pinCount2) {
   pinCount2 = pinCount2 || this.pinCount2;
   this.totalScore = pinCount1 + pinCount2;
   this.frameArray.push(this.totalScore);
+  this.pinCount1 = this.resetValue;
+  this.pinCount2 = this.resetValue;
 };
+
+
 
 
