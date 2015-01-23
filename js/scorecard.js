@@ -5,4 +5,8 @@ var Scorecard = function() {
 
 };
 
+Scorecard.prototype.enterPins = function(changePinsBy) {
+  this.pinCount += changePinsBy;
+};
+
 

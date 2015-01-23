@@ -18,4 +18,13 @@ describe('Scorecard', function() {
 
   });
 
+  describe('number of pins knocked down', function() {
+
+    it('should be able to be inputted', function() {
+      scorecard.enterPins(4);
+      expect(scorecard.pinCount).toEqual(4);
+    });
+
+  });
+
 });
