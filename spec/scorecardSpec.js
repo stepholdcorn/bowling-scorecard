@@ -12,12 +12,16 @@ describe('Scorecard', function() {
       expect(scorecard.pinCount1).toBe(null);
     });
 
-    it('should not have a total score', function() {
-      expect(scorecard.totalScore).toBe(null);
+    it('should not have a frame score', function() {
+      expect(scorecard.frameScore).toBe(null);
     });
 
     it('should not have any stored frame scores', function() {
       expect(scorecard.frameArray.length).toEqual(0);
+    });
+
+    it('should not have a total score', function() {
+      expect(scorecard.totalScore).toBe(null);
     });
 
   });
@@ -48,23 +52,32 @@ describe('Scorecard', function() {
     it('should be reset at the end of the frame', function() {
       scorecard.enterPins(4);
       scorecard.enterPins(3);
-      scorecard.totalCalculator(4, 3);
+      scorecard.frameCalculator(4, 3);
       expect(scorecard.pinCount1).toBe(null);
       expect(scorecard.pinCount2).toBe(null);
     });
 
   });
 
-  describe('score', function() {
-
-    it('should be the sum of the frame', function() {
-      scorecard.totalCalculator(4, 3);
-      expect(scorecard.totalScore).toEqual(7);
-    });
+  describe('frame score', function() {
 
     it('should be added to the frame array', function() {
-      scorecard.totalCalculator(4, 3);
+      scorecard.frameCalculator(4, 3);
       expect(scorecard.frameArray[0]).toEqual(7);
+    });
+
+    it('should be reset at the end of the frame', function() {
+      scorecard.frameCalculator(4, 3);
+      expect(scorecard.frameScore).toBe(null);
+    });
+
+  });
+
+  describe('total score', function() {
+
+    it('should be the running total', function() {
+      scorecard.totalCalculator([8,9]);
+      expect(scorecard.totalScore).toEqual(17);
     });
 
   });

@@ -2,8 +2,9 @@ var Scorecard = function() {
 
   this.pinCount1 = null;
   this.pinCount2 = null;
-  this.totalScore = null;
+  this.frameScore = null;
   this.frameArray = [];
+  this.totalScore = null;
   this.resetValue = null;
 
 };
@@ -20,14 +21,27 @@ Scorecard.prototype.enterPins = function(changePinsBy) {
   };
 };
 
-Scorecard.prototype.totalCalculator = function(pinCount1, pinCount2) {
+Scorecard.prototype.frameCalculator = function(pinCount1, pinCount2) {
   pinCount1 = pinCount1 || this.pinCount1;
   pinCount2 = pinCount2 || this.pinCount2;
-  this.totalScore = pinCount1 + pinCount2;
-  this.frameArray.push(this.totalScore);
+  this.frameScore = pinCount1 + pinCount2;
+  this.frameArray.push(this.frameScore);
   this.pinCount1 = this.resetValue;
   this.pinCount2 = this.resetValue;
+  this.frameScore = this.resetValue;
 };
+
+Scorecard.prototype.totalCalculator = function(frameArray) {
+  frameArray = frameArray || this.frameArray;
+  this.totalScore = this.resetValue;
+  for (var i = 0; i < frameArray.length; i++) {
+  this.totalScore += frameArray[i];
+  };
+};
+
+
+
+
 
 
 
