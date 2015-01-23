@@ -16,6 +16,10 @@ describe('Scorecard', function() {
       expect(scorecard.totalScore).toBe(null);
     });
 
+    it('should not have any stored frame scores', function() {
+      expect(scorecard.frameArray.length).toEqual(0);
+    });
+
   });
 
   describe('pin count', function() {
@@ -43,11 +47,16 @@ describe('Scorecard', function() {
 
   });
 
-  describe('total score', function() {
+  describe('score', function() {
 
     it('should be the sum of the frame', function() {
       scorecard.totalCalculator(4, 3);
       expect(scorecard.totalScore).toEqual(7);
+    });
+
+    it('should be added to the frame array', function() {
+      scorecard.totalCalculator(4, 3);
+      expect(scorecard.frameArray[0]).toEqual(7);
     });
 
   });
