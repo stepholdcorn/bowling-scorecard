@@ -59,6 +59,15 @@ describe('Scorecard', function() {
 
   });
 
+  describe('rules state that the second throw of a frame', function() {
+
+    it('should be zero if a strike is scored', function() {
+      scorecard.enterPins(10);
+      expect(scorecard.pinCount2).toEqual(0);
+    });
+
+  });
+
   describe('frame score', function() {
 
     it('should be added to the frame array', function() {

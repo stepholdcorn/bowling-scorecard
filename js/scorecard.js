@@ -26,23 +26,26 @@ Scorecard.prototype.frameCalculator = function(pinCount1, pinCount2) {
   pinCount2 = pinCount2 || this.pinCount2;
   this.frameScore = pinCount1 + pinCount2;
   this.frameArray.push(this.frameScore);
-  this.pinCount1 = this.resetValue;
-  this.pinCount2 = this.resetValue;
-  this.frameScore = this.resetValue;
+  this.resetFrame();
 };
 
 Scorecard.prototype.totalCalculator = function(frameArray) {
   frameArray = frameArray || this.frameArray;
+  this.frameCalculator();
   this.totalScore = this.resetValue;
   for (var i = 0; i < frameArray.length; i++) {
     this.totalScore += frameArray[i];
   };
 };
 
-Scorecard.prototype.resetAll = function() {
+Scorecard.prototype.resetFrame = function() {
   this.pinCount1 = this.resetValue;
   this.pinCount2 = this.resetValue;
   this.frameScore = this.resetValue;
+};
+
+Scorecard.prototype.resetAll = function() {
+  this.resetFrame();
   this.frameArray = [];
   this.totalScore = this.resetValue;
 };
