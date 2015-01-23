@@ -35,8 +35,16 @@ Scorecard.prototype.totalCalculator = function(frameArray) {
   frameArray = frameArray || this.frameArray;
   this.totalScore = this.resetValue;
   for (var i = 0; i < frameArray.length; i++) {
-  this.totalScore += frameArray[i];
+    this.totalScore += frameArray[i];
   };
+};
+
+Scorecard.prototype.resetAll = function() {
+  this.pinCount1 = this.resetValue;
+  this.pinCount2 = this.resetValue;
+  this.frameScore = this.resetValue;
+  this.frameArray = [];
+  this.totalScore = this.resetValue;
 };
 
 

@@ -71,6 +71,12 @@ describe('Scorecard', function() {
       expect(scorecard.frameScore).toBe(null);
     });
 
+    it('should be able to reset the stored values at the end of the game', function() {
+      scorecard.frameCalculator(4, 3);
+      scorecard.resetAll();
+      expect(scorecard.frameArray.length).toEqual(0);
+    });
+
   });
 
   describe('total score', function() {
@@ -78,6 +84,12 @@ describe('Scorecard', function() {
     it('should be the running total', function() {
       scorecard.totalCalculator([8,9]);
       expect(scorecard.totalScore).toEqual(17);
+    });
+
+    it('should be able to be reset', function() {
+      scorecard.totalCalculator([8,9]);
+      scorecard.resetAll();
+      expect(scorecard.totalScore).toEqual(null);
     });
 
   });
