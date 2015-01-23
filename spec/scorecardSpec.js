@@ -12,6 +12,10 @@ describe('Scorecard', function() {
       expect(scorecard.pinCount).toEqual(0);
     });
 
+    it('should have a total score of zero', function() {
+      expect(scorecard.totalScore).toEqual(0);
+    });
+
   });
 
 });
