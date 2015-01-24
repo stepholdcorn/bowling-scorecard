@@ -21,9 +21,12 @@ Scorecard.prototype.enterPins = function(changePinsBy) {
     this.pinCount1 += changePinsBy;
     this.strikeCheck();
   }
-  else {
+  else if (this.pinCount1 + changePinsBy < 11) {
     this.pinCount2 += changePinsBy;
     this.spareCheck();
+  }
+  else {
+    return 'Please enter a valid number';
   };
 };
 

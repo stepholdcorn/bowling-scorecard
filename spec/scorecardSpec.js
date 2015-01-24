@@ -42,6 +42,11 @@ describe('Scorecard', function() {
       expect(scorecard.pinCount1).toBe(null);
     });
 
+    it('total should not be more than 10', function() {
+      scorecard.enterPins(2);
+      expect(scorecard.enterPins(9)).toEqual('Please enter a valid number');
+    })
+
     it('should be stored separately for each throw in a frame'), function() {
       scorecard.enterPins(4);
       scorecard.enterPins(3);
