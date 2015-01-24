@@ -59,11 +59,34 @@ describe('Scorecard', function() {
 
   });
 
-  describe('rules state that the second throw of a frame', function() {
+  describe('strike', function() {
 
-    it('should be zero if a strike is scored', function() {
+    it('second throw should be zero', function() {
       scorecard.enterPins(10);
       expect(scorecard.pinCount2).toEqual(0);
+    });
+
+    it('should add a bonus to the running total', function() {
+      scorecard.enterPins(10);
+      scorecard.totalCalculator();
+      scorecard.enterPins(3);
+      scorecard.enterPins(4);
+      scorecard.totalCalculator();
+      expect(scorecard.totalScore).toEqual(24);
+    });
+
+  });
+
+  describe('spare', function() {
+
+    it('should add a bonus to the running total', function() {
+      scorecard.enterPins(2);
+      scorecard.enterPins(8);
+      scorecard.totalCalculator();
+      scorecard.enterPins(4);
+      scorecard.enterPins(3);
+      scorecard.totalCalculator();
+      expect(scorecard.totalScore).toEqual(21);
     });
 
   });

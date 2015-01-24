@@ -1,6 +1,8 @@
 var Scorecard = function() {
 
   this.pinCount1 = null;
+  this.strike = false;
+  this.awardStrikeBonus = false;
   this.pinCount2 = null;
   this.frameScore = null;
   this.frameArray = [];
@@ -15,28 +17,21 @@ Scorecard.prototype.enterPins = function(changePinsBy) {
   }
   else if (this.pinCount1 === null) {
     this.pinCount1 += changePinsBy;
-    this.strikeCheck(changePinsBy);
+    this.strikeCheck();
   }
   else {
     this.pinCount2 += changePinsBy;
   };
 };
 
-Scorecard.prototype.strikeCheck = function(changePinsBy) {
+Scorecard.prototype.strikeCheck = function() {
   if (this.pinCount1 === 10) {
     this.pinCount2 = 0;
-  }
+    this.strike = true;
+    }
   else {
-    this.pinCount2 += changePinsBy;
+    this.pinCount2 = this.resetValue;
   };
-};
-
-Scorecard.prototype.frameCalculator = function(pinCount1, pinCount2) {
-  pinCount1 = pinCount1 || this.pinCount1;
-  pinCount2 = pinCount2 || this.pinCount2;
-  this.frameScore = pinCount1 + pinCount2;
-  this.frameArray.push(this.frameScore);
-  this.resetFrame();
 };
 
 Scorecard.prototype.totalCalculator = function(frameArray) {
@@ -47,9 +42,33 @@ Scorecard.prototype.totalCalculator = function(frameArray) {
   };
 };
 
+Scorecard.prototype.frameCalculator = function(pinCount1, pinCount2) {
+  pinCount1 = pinCount1 || this.pinCount1;
+  pinCount2 = pinCount2 || this.pinCount2;
+  if (this.awardStrikeBonus === true) {
+    this.frameScore = 2 * (pinCount1 + pinCount2);
+  }
+  else {
+    this.frameScore = pinCount1 + pinCount2;
+  };
+  this.frameArray.push(this.frameScore);
+  this.checkStrikeBonus();
+  this.resetFrame();
+};
+
+Scorecard.prototype.checkStrikeBonus = function() {
+  if (this.strike === true) {
+    this.awardStrikeBonus = true;
+  }
+  else {
+    this.awardStrikeBonus = false;
+  };
+};
+
 Scorecard.prototype.resetFrame = function() {
   this.pinCount1 = this.resetValue;
   this.pinCount2 = this.resetValue;
+  this.strike = this.resetValue;
   this.frameScore = this.resetValue;
   this.totalScore = this.resetValue;
 };
