@@ -4,20 +4,23 @@
   <meta charset="utf-8">
   <title>Scorecard</title>
   <link rel="stylesheet" type="text/css" href="css/layout.css"></link>
-  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-  <script src="js/scorecard.js"></script>
-  <script src="js/interface.js"></script>
 </head>
+
   <body>
     <h1>Bowling Scorecard</h1>
-      <form>
-          First throw: <input type="text" name="pins1">
+
+      <form id="newThrowForm">
+          <input type="text" id="newThrowScore" placeholder="Throw Score">
+          <input type="submit" id="addButton" value="add">
       </form>
-      <button id="first-throw">Enter</button>
-      <form>
-          Second throw: <input type="text" name="pins2">
-      </form>
-      <button id="second-throw">Enter</button>
-    <p class="score"></p>
+
+      <ul>
+        <li>Pins Knocked Down</li>
+      </ul>
+
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="js/scorecard.js"></script>
+    <script src="js/interface.js"></script>
   </body>
+
 </html>

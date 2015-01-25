@@ -1,19 +1,20 @@
-var scorecard = new Scorecard ();
+$(function() {
 
-$(document).ready(function(){
+  // SETUP
+  var scorecard = new Scorecard ();
+  var $newThrowForm = $('#newThrowForm');
+  var $textInput = $('input:text');
 
-  $('#first-throw').click(function() {
-    var pins1 = $("input[name=pins1]").val();
-      scorecard.enterPins(pins1);
-      $('.score').append("<p>"+pins1+"</p>");
-  });
-
-  $('#second-throw').click(function() {
-    var pins2 = $("input[name=pins2]").val();
-      scorecard.enterPins(pins2);
-      $('.score').append("<p>"+pins2+"</p>");
+  // ADD THROW SCORE
+  $newThrowForm.on('submit', function(e) {
+    e.preventDefault();
+    var newNumber = $textInput.val();
+    scorecard.enterPins(newNumber);
+    $('li:last').after('<li>' + newNumber + '</li>');
+    $textInput.val('');
   });
 
 });
+
 
 
