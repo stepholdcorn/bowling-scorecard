@@ -7,22 +7,28 @@
 </head>
 
   <body>
-    <h1>Bowling Scorecard</h1>
-      <h3 id="message">First Throw</h3>
-      <form id="newThrowForm">
-          <input type="text" id="newThrowScore" placeholder="Throw Score">
-          <input type="submit" id="addButton" value="add">
-      </form>
 
-      <h4>Pins Knocked Down</h4>
+    <main class="grid">
+      <section class="col-2-12"></section>
+      <section class="col-10-12">
+        <h1>Bowling Scorecard</h1>
+          <h3 id="message">First Throw</h3>
+          <form id="newThrowForm">
+            <input type="text" id="newThrowScore" placeholder="Throw Score">
+            <input type="submit" id="addButton" value="add">
+          </form>
 
-      <ul>
-        <li id="first"></li>
-      </ul>
+          <h4>Pins Knocked Down</h4>
 
-      <h2>0</h2>
+          <ul>
+            <li id="first"></li>
+          </ul>
 
-      <button id="reset">Reset</button>
+          <h2>0</h2>
+
+          <button id="reset">Reset</button>
+        </section>
+    </main>
 
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script src="js/scorecard.js"></script>

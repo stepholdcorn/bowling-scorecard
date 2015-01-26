@@ -1,3 +1,20 @@
+@import url('normalize.css');
+@import url('grid.css');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.col-2-12 {
+  background-color: #FFA3A3;
+}
+
+
+.col-10-12 {
+  background-color: white;
+}
+
 ul {
   list-style-type: none;
 }
