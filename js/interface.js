@@ -4,10 +4,10 @@ $(function() {
   var scorecard = new Scorecard();
   var $message = $('#message');
   var $newThrowForm = $('#newThrowForm');
-  var $totalScoreDisplay = $('#totalScoreDisplay');
   var $textInput = $('input:text');
 
   $message.show();
+
   // ADD THROW SCORE
   $newThrowForm.on('submit', function(e) {
     e.preventDefault();
@@ -16,12 +16,13 @@ $(function() {
     scorecard.enterPins(newNumber);
     $('li:last').after('<li>' + newInput + '</li>');
     $textInput.val('');
+    updateTotalCheck();
     messageCheck();
   });
 
   // CHANGE ENTER PINS MESSAGE
   function messageCheck() {
-    if($message.text() === 'First Throw') {
+    if ($message.text() === 'First Throw') {
       $message.text('Second Throw');
     }
     else {
@@ -29,11 +30,13 @@ $(function() {
     };
   }
 
-  // SHOW TOTAL SCORE
-  $totalScoreDisplay.on('click', function() {
-    scorecard.totalCalculator();
-    $('h2').text(scorecard.totalScore);
-  });
+  // SHOW TOTAL SCORE AUTOMATICALLY
+  function updateTotalCheck() {
+    if (scorecard.pinCount2 !== null) {
+      scorecard.totalCalculator();
+      $('h2').text(scorecard.totalScore);
+    };
+  }
 
 });
 
