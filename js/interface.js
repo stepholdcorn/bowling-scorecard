@@ -5,6 +5,7 @@ $(function() {
   var $message = $('#message');
   var $newThrowForm = $('#newThrowForm');
   var $textInput = $('input:text');
+  var $reset = $('#reset');
 
   $message.show();
 
@@ -37,6 +38,14 @@ $(function() {
       $('h2').text(scorecard.totalScore);
     };
   }
+
+  // RESET BUTTON
+  $reset.on('click', function() {
+    scorecard.resetAll();
+    $('li:not(#first)').remove();
+    $('h2').text('0');
+  });
+
 
 });
 
