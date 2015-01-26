@@ -15,7 +15,7 @@ var Scorecard = function() {
 
 Scorecard.prototype.enterPins = function(changePinsBy) {
   if (changePinsBy > 10 || changePinsBy < 0) {
-    return 'Please enter a valid number';
+    alert('Please enter a valid number');
   }
   else if (this.pinCount1 === null) {
     this.pinCount1 += changePinsBy;
@@ -26,7 +26,7 @@ Scorecard.prototype.enterPins = function(changePinsBy) {
     this.spareCheck();
   }
   else {
-    return 'Please enter a valid number';
+    alert('Please enter a valid number');
   };
 };
 
@@ -35,9 +35,6 @@ Scorecard.prototype.strikeCheck = function() {
     this.pinCount2 = 0;
     this.strike = true;
   }
-  else {
-    this.pinCount2 = this.resetValue;
-  };
 };
 
 Scorecard.prototype.spareCheck = function() {
