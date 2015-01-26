@@ -31,7 +31,12 @@
   width: 16.67%;
 }
 
-.col-10-12 {
+.col-4-12 {
   height: 100vh;
-  width: 83.33%;
+  width: 33.33%;
+}
+
+.col-6-12 {
+  height: 100vh;
+  width: 50.00%;
 }

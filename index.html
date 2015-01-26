@@ -9,25 +9,28 @@
   <body>
 
     <main class="grid">
-      <section class="col-2-12"></section>
-      <section class="col-10-12">
-        <h1>Bowling Scorecard</h1>
-          <h3 id="message">First Throw</h3>
-          <form id="newThrowForm">
-            <input type="text" id="newThrowScore" placeholder="Throw Score">
-            <input type="submit" id="addButton" value="add">
-          </form>
+      <section class="col-2-12">
+        <img class="logo" src="img/logo.svg">
+      </section>
+      <section class="col-4-12">
+        <button id="reset">Reset</button>
+        <h3 id="message">First Throw</h3>
+        <form id="newThrowForm">
+          <input type="text" id="newThrowScore" placeholder="Number of pins">
+          <input type="submit" id="addButton" value="add">
+        </form>
 
-          <h4>Pins Knocked Down</h4>
+        <ul>
+          <li id="first"></li>
+        </ul>
+      </section>
+      <section class="col-6-12">
+      <section id="container">
+        <img class="ball" src="img/ball.svg">
+        <h2>0</h2>
+      </section>
 
-          <ul>
-            <li id="first"></li>
-          </ul>
-
-          <h2>0</h2>
-
-          <button id="reset">Reset</button>
-        </section>
+      </section>
     </main>
 
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
