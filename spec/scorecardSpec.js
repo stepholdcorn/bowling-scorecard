@@ -128,7 +128,8 @@ describe('Scorecard', function() {
 
   describe('tenth frame', function() {
     it('signals the last frame of the game', function() {
-
+      scorecard.frameCount = 9;
+      expect(scorecard.gameCheck()).toEqual('This is your last frame');
     });
   });
 
