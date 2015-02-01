@@ -136,8 +136,8 @@ describe('Scorecard', function() {
     it('prevents the player from starting an eleventh frame', function() {
       scorecard.frameCount = 10;
       expect(function() { scorecard.enterPins(4) }).toThrow(new Error ('The game is over'));
-
     });
+
   });
 
 });

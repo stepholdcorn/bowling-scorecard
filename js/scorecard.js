@@ -39,9 +39,7 @@ Scorecard.prototype.strikeCheck = function() {
 };
 
 Scorecard.prototype.spareCheck = function() {
-  if (this.pinCount1 + this.pinCount2 === 10) {
-    this.spare = true;
-  };
+  if (this.pinCount1 + this.pinCount2 === 10) this.spare = true;
 };
 
 Scorecard.prototype.totalCalculator = function(frameArray) {
@@ -55,15 +53,9 @@ Scorecard.prototype.totalCalculator = function(frameArray) {
 Scorecard.prototype.frameCalculator = function(pinCount1, pinCount2) {
   pinCount1 = pinCount1 || this.pinCount1;
   pinCount2 = pinCount2 || this.pinCount2;
-  if (this.awardStrikeBonus === true) {
-    this.frameScore = 2 * (pinCount1 + pinCount2);
-  }
-  else if (this.awardSpareBonus === true) {
-    this.frameScore = (2 * pinCount1) + pinCount2;
-  }
-  else {
-    this.frameScore = pinCount1 + pinCount2;
-  };
+  if (this.awardStrikeBonus === true) this.frameScore = 2 * (pinCount1 + pinCount2);
+  else if (this.awardSpareBonus === true) this.frameScore = (2 * pinCount1) + pinCount2;
+  else this.frameScore = pinCount1 + pinCount2;
   this.frameArray.push(this.frameScore);
   this.checkBonuses();
   this.resetFrame();
@@ -71,12 +63,8 @@ Scorecard.prototype.frameCalculator = function(pinCount1, pinCount2) {
 };
 
 Scorecard.prototype.checkBonuses = function() {
-  if (this.strike === true) {
-    this.awardStrikeBonus = true;
-  }
-  else if (this.spare === true) {
-    this.awardSpareBonus = true;
-  }
+  if (this.strike === true) this.awardStrikeBonus = true;
+  else if (this.spare === true) this.awardSpareBonus = true;
   else {
     this.awardStrikeBonus = false;
     this.awardSpareBonus = false;
@@ -84,12 +72,7 @@ Scorecard.prototype.checkBonuses = function() {
 };
 
 Scorecard.prototype.resetFrame = function() {
-  this.pinCount1 = this.resetValue;
-  this.pinCount2 = this.resetValue;
-  this.strike = this.resetValue;
-  this.spare = this.resetValue;
-  this.frameScore = this.resetValue;
-  this.totalScore = this.resetValue;
+  this.pinCount1 = this.pinCount2 = this.strike = this.spare = this.frameScore = this.totalScore = this.resetValue;
 };
 
 Scorecard.prototype.gameCheck = function() {
