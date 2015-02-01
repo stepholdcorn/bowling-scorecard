@@ -9,16 +9,16 @@ var Scorecard = function() {
   this.frameScore = null;
   this.frameArray = [];
   this.frameCount = this.frameArray.length;
+  this.lastFrame = false;
   this.totalScore = null;
   this.resetValue = null;
 
 };
 
 Scorecard.prototype.enterPins = function(changePinsBy) {
-  if (changePinsBy > 10 || changePinsBy < 0) {
-    throw new Error ('Please enter a valid number');
-  }
-  else if (this.pinCount1 === null) {
+  if (this.frameCount === 10) throw new Error ('The game is over');
+  if (changePinsBy > 10 || changePinsBy < 0) throw new Error ('Please enter a valid number');
+  if (this.pinCount1 === null) {
     this.pinCount1 += changePinsBy;
     this.strikeCheck();
   }
@@ -93,7 +93,7 @@ Scorecard.prototype.resetFrame = function() {
 };
 
 Scorecard.prototype.gameCheck = function() {
-  if (this.frameCount === 9) return 'This is your last frame';
+  if (this.frameCount === 9) this.lastFrame = true;
 };
 
 Scorecard.prototype.resetAll = function() {

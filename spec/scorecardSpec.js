@@ -129,7 +129,14 @@ describe('Scorecard', function() {
   describe('tenth frame', function() {
     it('signals the last frame of the game', function() {
       scorecard.frameCount = 9;
-      expect(scorecard.gameCheck()).toEqual('This is your last frame');
+      scorecard.gameCheck();
+      expect(scorecard.lastFrame).toBe(true);
+    });
+
+    it('prevents the player from starting an eleventh frame', function() {
+      scorecard.frameCount = 10;
+      expect(function() { scorecard.enterPins(4) }).toThrow(new Error ('The game is over'));
+
     });
   });
 
