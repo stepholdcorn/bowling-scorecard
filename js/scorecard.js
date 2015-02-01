@@ -8,6 +8,7 @@ var Scorecard = function() {
   this.awardSpareBonus = false;
   this.frameScore = null;
   this.frameArray = [];
+  this.frameCount = this.frameArray.length;
   this.totalScore = null;
   this.resetValue = null;
 
@@ -15,7 +16,7 @@ var Scorecard = function() {
 
 Scorecard.prototype.enterPins = function(changePinsBy) {
   if (changePinsBy > 10 || changePinsBy < 0) {
-    alert('Please enter a valid number');
+    throw new Error ('Please enter a valid number');
   }
   else if (this.pinCount1 === null) {
     this.pinCount1 += changePinsBy;
@@ -26,7 +27,7 @@ Scorecard.prototype.enterPins = function(changePinsBy) {
     this.spareCheck();
   }
   else {
-    alert('Please enter a valid number');
+    throw new Error ('Please enter a valid number');
   };
 };
 
@@ -66,6 +67,7 @@ Scorecard.prototype.frameCalculator = function(pinCount1, pinCount2) {
   this.frameArray.push(this.frameScore);
   this.checkBonuses();
   this.resetFrame();
+  this.gameCheck();
 };
 
 Scorecard.prototype.checkBonuses = function() {
@@ -88,6 +90,10 @@ Scorecard.prototype.resetFrame = function() {
   this.spare = this.resetValue;
   this.frameScore = this.resetValue;
   this.totalScore = this.resetValue;
+};
+
+Scorecard.prototype.gameCheck = function() {
+  if (this.frameCount === 9) return 'This is your last frame';
 };
 
 Scorecard.prototype.resetAll = function() {

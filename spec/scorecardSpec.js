@@ -28,31 +28,26 @@ describe('Scorecard', function() {
 
   describe('pin count', function() {
 
-    it('should be able to be inputted'), function() {
+    it('should be able to be inputted', function() {
       scorecard.enterPins(4);
       expect(scorecard.pinCount1).toEqual(4);
-    };
-
-    it('should be between 0 and 10', function() {
-      expect(scorecard.enterPins(-3)).toEqual('Please enter a valid number');
     });
 
-    it('should not increase if number is not between 0 and 10', function() {
-      scorecard.enterPins(12);
-      expect(scorecard.pinCount1).toBe(null);
+    it('should be between 0 and 10', function() {
+      expect(function() { scorecard.enterPins(-3) }).toThrow(new Error ('Please enter a valid number'));
     });
 
     it('total should not be more than 10', function() {
       scorecard.enterPins(2);
-      expect(scorecard.enterPins(9)).toEqual('Please enter a valid number');
-    })
+      expect(function() { scorecard.enterPins(9) }).toThrow(new Error ('Please enter a valid number'));
+    });
 
-    it('should be stored separately for each throw in a frame'), function() {
+    it('should be stored separately for each throw in a frame', function() {
       scorecard.enterPins(4);
       scorecard.enterPins(3);
       expect(scorecard.pinCount1).toEqual(4);
       expect(scorecard.pinCount2).toEqual(3);
-    };
+    });
 
     it('should be reset at the end of the frame', function() {
       scorecard.enterPins(4);
@@ -111,7 +106,7 @@ describe('Scorecard', function() {
     it('should be able to reset the stored values at the end of the game', function() {
       scorecard.frameCalculator(4, 3);
       scorecard.resetAll();
-      expect(scorecard.frameArray.length).toEqual(0);
+      expect(scorecard.frameCount).toEqual(0);
     });
 
   });
@@ -129,6 +124,12 @@ describe('Scorecard', function() {
       expect(scorecard.totalScore).toEqual(null);
     });
 
+  });
+
+  describe('tenth frame', function() {
+    it('signals the last frame of the game', function() {
+
+    });
   });
 
 });
