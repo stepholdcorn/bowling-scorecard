@@ -16,19 +16,24 @@ var Scorecard = function() {
 };
 
 Scorecard.prototype.enterPins = function(changePinsBy) {
-  if (this.frameCount === 10) throw new Error ('The game is over');
-  if (changePinsBy > 10 || changePinsBy < 0) throw new Error ('Please enter a valid number');
+  if (this.gameOver()) throw new Error ('The game is over');
+  if (this.invalidEntry(changePinsBy)) throw new Error ('Please enter a valid number');
   if (this.pinCount1 === null) {
     this.pinCount1 += changePinsBy;
     this.strikeCheck();
   }
-  else if (this.pinCount1 + changePinsBy < 11) {
+  else {
     this.pinCount2 += changePinsBy;
     this.spareCheck();
-  }
-  else {
-    throw new Error ('Please enter a valid number');
   };
+};
+
+Scorecard.prototype.gameOver = function() {
+  return this.frameCount === 10;
+};
+
+Scorecard.prototype.invalidEntry = function(changePinsBy) {
+  return changePinsBy > 10 || changePinsBy < 0 || this.pinCount1 + changePinsBy > 10;
 };
 
 Scorecard.prototype.strikeCheck = function() {
@@ -39,33 +44,50 @@ Scorecard.prototype.strikeCheck = function() {
 };
 
 Scorecard.prototype.spareCheck = function() {
-  if (this.pinCount1 + this.pinCount2 === 10) this.spare = true;
+  if (this.pinCount1 + this.pinCount2 === 10) {
+    this.spare = true;
+  }
 };
 
 Scorecard.prototype.totalCalculator = function(frameArray) {
-  frameArray = frameArray || this.frameArray;
-  this.frameCalculator();
-  for (var i = 0; i < frameArray.length; i++) {
-    this.totalScore += frameArray[i];
+  this.frame();
+  for (var i = 0; i < this.frameArray.length; i++) {
+    this.totalScore += this.frameArray[i];
   };
 };
 
-Scorecard.prototype.frameCalculator = function(pinCount1, pinCount2) {
-  pinCount1 = pinCount1 || this.pinCount1;
-  pinCount2 = pinCount2 || this.pinCount2;
-  if (this.awardStrikeBonus === true) this.frameScore = 2 * (pinCount1 + pinCount2);
-  else if (this.awardSpareBonus === true) this.frameScore = (2 * pinCount1) + pinCount2;
-  else this.frameScore = pinCount1 + pinCount2;
+Scorecard.prototype.frame = function(pinCount1, pinCount2) {
+  this.frameCalculator(pinCount1, pinCount2);
   this.frameArray.push(this.frameScore);
-  this.checkBonuses();
+  this.addBonuses();
   this.resetFrame();
-  this.gameCheck();
+  this.frameCheck();
 };
 
-Scorecard.prototype.checkBonuses = function() {
-  if (this.strike === true) this.awardStrikeBonus = true;
-  else if (this.spare === true) this.awardSpareBonus = true;
-  else {
+Scorecard.prototype.frameCalculator = function(pinCount1, pinCount2) {
+  if (this.hasStrikeBonus()) {
+    this.frameScore = 2 * (this.pinCount1 + this.pinCount2);
+  } else if (this.hasSpareBonus()) {
+    this.frameScore = (2 * this.pinCount1) + this.pinCount2;
+  } else {
+    this.frameScore = this.pinCount1 + this.pinCount2;
+  };
+};
+
+Scorecard.prototype.hasStrikeBonus = function() {
+  return this.awardStrikeBonus === true;
+}
+
+Scorecard.prototype.hasSpareBonus = function(first_argument) {
+  return this.awardSpareBonus === true;
+};
+
+Scorecard.prototype.addBonuses = function() {
+  if (this.strike === true) {
+    this.awardStrikeBonus = true;
+  } else if (this.spare === true) {
+    this.awardSpareBonus = true;
+  } else {
     this.awardStrikeBonus = false;
     this.awardSpareBonus = false;
   };
@@ -75,7 +97,7 @@ Scorecard.prototype.resetFrame = function() {
   this.pinCount1 = this.pinCount2 = this.strike = this.spare = this.frameScore = this.totalScore = this.resetValue;
 };
 
-Scorecard.prototype.gameCheck = function() {
+Scorecard.prototype.frameCheck = function() {
   if (this.frameCount === 9) this.lastFrame = true;
 };
 
@@ -83,11 +105,6 @@ Scorecard.prototype.resetAll = function() {
   this.resetFrame();
   this.frameArray = [];
 };
-
-
-
-
-
 
 
 

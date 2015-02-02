@@ -26,7 +26,7 @@ describe('Scorecard', function() {
 
   });
 
-  describe('pin count', function() {
+  describe('Pin count', function() {
 
     it('should be able to be inputted', function() {
       scorecard.enterPins(4);
@@ -52,7 +52,7 @@ describe('Scorecard', function() {
     it('should be reset at the end of the frame', function() {
       scorecard.enterPins(4);
       scorecard.enterPins(3);
-      scorecard.frameCalculator(4, 3);
+      scorecard.frame(4, 3);
       expect(scorecard.pinCount1).toBe(null);
       expect(scorecard.pinCount2).toBe(null);
     });
@@ -94,17 +94,19 @@ describe('Scorecard', function() {
   describe('frame score', function() {
 
     it('should be added to the frame array', function() {
-      scorecard.frameCalculator(4, 3);
+      scorecard.enterPins(3);
+      scorecard.enterPins(4);
+      scorecard.frame();
       expect(scorecard.frameArray[0]).toEqual(7);
     });
 
     it('should be reset at the end of the frame', function() {
-      scorecard.frameCalculator(4, 3);
+      scorecard.frame(4, 3);
       expect(scorecard.frameScore).toBe(null);
     });
 
     it('should be able to reset the stored values at the end of the game', function() {
-      scorecard.frameCalculator(4, 3);
+      scorecard.frame(4, 3);
       scorecard.resetAll();
       expect(scorecard.frameCount).toEqual(0);
     });
@@ -114,7 +116,11 @@ describe('Scorecard', function() {
   describe('total score', function() {
 
     it('should be the running total', function() {
-      scorecard.totalCalculator([8,9]);
+      scorecard.enterPins(3);
+      scorecard.enterPins(4);
+      scorecard.totalCalculator();
+      scorecard.enterPins(10);
+      scorecard.totalCalculator();
       expect(scorecard.totalScore).toEqual(17);
     });
 
@@ -129,7 +135,7 @@ describe('Scorecard', function() {
   describe('tenth frame', function() {
     it('signals the last frame of the game', function() {
       scorecard.frameCount = 9;
-      scorecard.gameCheck();
+      scorecard.frameCheck();
       expect(scorecard.lastFrame).toBe(true);
     });
 

@@ -17,12 +17,12 @@ $(function() {
     scorecard.enterPins(newNumber);
     $('li:last').after('<li>' + newInput + '</li>');
     $textInput.val('');
-    updateTotalCheck();
-    messageCheck();
+    updateTotal();
+    messageDisplay();
   });
 
   // CHANGE ENTER PINS MESSAGE
-  function messageCheck() {
+  function messageDisplay() {
     if ($message.text() === 'First Throw') {
       $message.text('Second Throw');
     }
@@ -32,7 +32,7 @@ $(function() {
   }
 
   // SHOW TOTAL SCORE AUTOMATICALLY
-  function updateTotalCheck() {
+  function updateTotal() {
     if (scorecard.pinCount2 !== null) {
       scorecard.totalCalculator();
       $('h2').text(scorecard.totalScore);
@@ -46,8 +46,7 @@ $(function() {
     $('h2').text('0');
   });
 
-
-});
+}());
 
 
 
